@@ -1,0 +1,5 @@
+1、随机排序chan生成pollorder，用于后续顺序接收或发送chan信息
+2、按chan地址排序chan生成lockorder，用于后续加锁解锁chan(避免重复加锁&解锁)
+3、按pollorder按个接收或发送chan信息，成功则返回对应的case index
+4、不成功时，如有default则执行default，否则将当前g挂起到各个chan，等待唤醒
+5、唤醒后，从各个chan中释放，并获取唤醒的g对应的chan信息，返回对应的index
